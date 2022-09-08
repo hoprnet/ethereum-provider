@@ -1,0 +1,14 @@
+---
+roles:
+  - name: 'geerlingguy.docker'
+    src: 'https://github.com/geerlingguy/ansible-role-docker'
+    version: '4.1.1'
+  - name: 'hopr.nethermind'
+    src: 'https://github.com/hoprnet/ansible-role-nethermind.git'
+    version: 'master'
+  - name: 'hopr.certbot'
+    src: 'https://github.com/hoprnet/ansible-role-certbot.git'
+    version: 'master'
+  - name: 'hopr.haproxy'
+    src: 'https://github.com/hoprnet/ansible-role-haproxy.git'
+    version: 'master'

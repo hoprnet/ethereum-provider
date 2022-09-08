@@ -1,0 +1,16 @@
+---
+all:
+  hosts:
+    primary:
+    secondary:
+    nethermind01:
+    nethermind02:
+  children:
+    loadbalancers:
+      hosts:
+        primary:
+        secondary:
+    nethermind:
+      hosts:
+        nethermind01:
+        nethermind02:

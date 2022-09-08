@@ -1,0 +1,10 @@
+# file: main.yaml
+---
+- name: 'Install Nethermind'
+  import_playbook: ./playbooks/nethermind.yaml
+  tags:
+    - nethermind
+- name: 'Install HA Proxy'
+  import_playbook: ./playbooks/haproxy.yaml
+  tags:
+    - haproxy

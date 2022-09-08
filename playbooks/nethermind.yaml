@@ -1,0 +1,49 @@
+---
+- name: "Setup Nethermind"
+  hosts: nethermind
+  gather_facts: true
+  become: true
+  tags:
+    - setup
+  pre_tasks:
+    - name: Update repositories cache
+      ansible.builtin.apt:
+        update_cache: true
+    - name: 'Identify architecture'
+      ansible.builtin.raw: "dpkg --print-architecture | tr -d '\n'"
+      register: architecture
+      changed_when: false
+  roles:
+    - role: geerlingguy.docker
+      docker_apt_arch: "{{ architecture.stdout }}"
+      docker_install_compose: true
+      docker_compose_version: "v2.6.1"
+      docker_compose_path: /usr/local/bin/docker-compose
+- name: "Install Nethermind"
+  hosts: nethermind
+  gather_facts: true
+  become: true
+  tags:
+    - setup
+    - install
+  tasks:
+    - name: "Install Nethermind Xdai"
+      ansible.builtin.include_role:
+        name: hopr.nethermind
+      vars:
+        nethermind_config: "xdai"
+        nethermind_app_path: "/opt/nethermind-{{ nethermind_config }}"
+        nethermind_port: "30303"
+        nethermind_websockets_enabled: "true"
+        nethermind_websockets_port: "8545"
+        nethermind_modules: "[Web3,Eth,Subscribe,Net,Http,Client,Jsonrpc,Admin]"
+    - name: "Install Nethermind Goerli"
+      ansible.builtin.include_role:
+        name: hopr.nethermind
+      vars:
+        nethermind_config: "goerli"
+        nethermind_app_path: "/opt/nethermind-{{ nethermind_config }}"
+        nethermind_port: "30304"
+        nethermind_websockets_enabled: "true"
+        nethermind_websockets_port: "8546"
+        nethermind_modules: "[Web3,Eth,Subscribe,Net,Http,Client,Jsonrpc,Admin]"

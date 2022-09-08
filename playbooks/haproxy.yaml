@@ -1,0 +1,56 @@
+---
+- name: "Setup HAProxy"
+  hosts: loadbalancers
+  gather_facts: true
+  become: true
+  tags:
+    - setup
+  pre_tasks:
+    - name: Update repositories cache
+      ansible.builtin.apt:
+        update_cache: true
+  roles:
+    - role: geerlingguy.docker
+      docker_apt_arch: "amd64"
+      docker_install_compose: true
+      docker_compose_version: "v2.6.1"
+      docker_compose_path: /usr/local/bin/docker-compose
+  tasks:
+    - name: "Install certbot"
+      ansible.builtin.include_role:
+        name: hopr.certbot
+- name: "Install HAProxy"
+  hosts: loadbalancers
+  gather_facts: true
+  become: true
+  tags:
+    - setup
+    - install
+  tasks:
+    - name: "Install certificates"
+      ansible.builtin.include_role:
+        name: hopr.certbot
+        tasks_from: add_certificate
+      vars:
+        certificate_domain_name: "{{ item.domain_name }}"
+        certificate_email: "{{ item.email }}"
+      with_items:
+        - domain_name: "{{ gnosis_domain_name }}"
+          email: "acme@hoprnet.org"
+        - domain_name: "{{ goerli_domain_name }}"
+          email: "acme@hoprnet.org"
+    - name: "Install HA Proxy"
+      ansible.builtin.include_role:
+        name: hopr.haproxy
+      vars:
+        domains:
+          - domain_name: "{{ gnosis_domain_name }}"
+            backend_port: 8545
+            backend_hosts:
+              - 95.217.33.35
+              - 116.202.86.163
+          - domain_name: "{{ goerli_domain_name }}"
+            backend_port: 8546
+            backend_hosts:
+              - 95.217.33.35
+              - 116.202.86.163
