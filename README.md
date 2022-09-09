@@ -87,6 +87,7 @@ License
 -------
 
 MIT
+
 Author Information
 ------------------
 
