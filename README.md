@@ -51,7 +51,7 @@ Installation
 
 - Create 4 Debian linux machines, they can be bare metal or virtual machines.
 - In case that you are using a dynamic ansible inventory, then modify the [hosts.yaml](./inventories/hosts.yaml) file to assign the hostnames to the desired groups `loadbalancers` and `nethermind`. Some dynamic ansible inventories use tag machines for grouping, so tagging the machine would be a simplier way. 
-- In case that you are using a static ansible inventory, then create a file called ssh_config at the root of this repo that will have the ssh configuration to connect to those linux machines. Here is an example of the contents of this file:
+- In case that you are using a static ansible inventory, then create a file called `ssh_config` at the root of this repo that will have the ssh configuration to connect to those linux machines. Here is an example of the contents of this file:
   ````
   # Add this line to your ~/.ssh/config file
   ## Load Balancers
