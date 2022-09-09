@@ -41,9 +41,54 @@ curl -H "Origin: http://primary.goerli-chain.rpc.hoprtech.com" -X POST --data '{
 curl -H "Origin: http://secondary.goerli-chain.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.goerli-chain.rpc.hoprtech.net
 ```
 
+
+
+Installation
+------------
+
+- Specify inventory hosts at your will by modifying [hosts.yaml](./inventories/stage/hosts.yaml)
+
+
+- Install requirements
+```
+    make galaxy
+```
+- Install Ethereum provider
+```   
+    make install env=stage
+```
+Requirements
+------------
+
+This playbook requires this roles to be installed (It is done throught the `make galaxy` command):
+
+
+  - [Ansible docker role](https://github.com/geerlingguy/ansible-role-docker)
+  - [Ansible nethermind role](https://github.com/hoprnet/ansible-role-nethermind.git)
+  - [Ansible certbot role](https://github.com/hoprnet/ansible-role-certbot.git)
+  - [Ansible haproxy role](https://github.com/hoprnet/ansible-role-haproxy.git)
+
+Playbook Variables
+--------------
+
+| Variables | Required | Default value | Description |
+|-----------|----------|---------------|-------------|
+| gnosis_domain_name  | true     | *primary.gnosis-chain.rpc.hoprtech.net*          | DNS name for the gnosis chain. Should be specified as host variable at the inventory to provide different values for each host. |
+| goerli_domain_name  | true     | *primary.goerli-chain.rpc.hoprtech.net*          | DNS name for the goerli chain. Should be specified as host variable at the inventory to provide different values for each host. |
+| gnosis_backend_port  | true     | *8545*          | Port used to communicate between HA Proxy and Nethermind for Gnosis |
+| goerli_backend_port  | true     | *8546*          | Port used to communicate between HA Proxy and Nethermind for Goerli |
+| gnosis_backend_hosts  | true     | *[IP1, IP2]*          | List of IP of the Nethermind hosts for Gnosis |
+| goerli_backend_hosts  | true     | *[IP1, IP2]*          | List of IP of the Nethermind hosts for Goerli |
+
+These variables are set at the inventory level. Have a look at them [here](./inventories/stage/)
+
+
 License
 -------
 
 MIT
+Author Information
+------------------
 
+This role was created by [Hopr](https://hoprnet.org/)
 

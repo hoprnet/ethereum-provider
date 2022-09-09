@@ -35,7 +35,7 @@
         nethermind_app_path: "/opt/nethermind-{{ nethermind_config }}"
         nethermind_port: "30303"
         nethermind_websockets_enabled: "true"
-        nethermind_websockets_port: "8545"
+        nethermind_websockets_port: "{{ gnosis_backend_port }}"
         nethermind_modules: "[Web3,Eth,Subscribe,Net,Http,Client,Jsonrpc,Admin]"
     - name: "Install Nethermind Goerli"
       ansible.builtin.include_role:
@@ -45,5 +45,5 @@
         nethermind_app_path: "/opt/nethermind-{{ nethermind_config }}"
         nethermind_port: "30304"
         nethermind_websockets_enabled: "true"
-        nethermind_websockets_port: "8546"
+        nethermind_websockets_port: "{{ goerli_backend_port }}"
         nethermind_modules: "[Web3,Eth,Subscribe,Net,Http,Client,Jsonrpc,Admin]"

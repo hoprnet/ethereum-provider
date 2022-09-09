@@ -45,12 +45,8 @@
       vars:
         domains:
           - domain_name: "{{ gnosis_domain_name }}"
-            backend_port: 8545
-            backend_hosts:
-              - 95.217.33.35
-              - 116.202.86.163
+            backend_port: "{{ gnosis_backend_port }}"
+            backend_hosts: "{{ gnosis_backend_hosts }}"
           - domain_name: "{{ goerli_domain_name }}"
-            backend_port: 8546
-            backend_hosts:
-              - 95.217.33.35
-              - 116.202.86.163
+            backend_port: "{{ goerli_backend_port }}"
+            backend_hosts: "{{ goerli_backend_hosts }}"
