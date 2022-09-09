@@ -46,7 +46,7 @@ curl -H "Origin: http://secondary.goerli-chain.rpc.hoprtech.com" -X POST --data 
 Installation
 ------------
 
-- Specify inventory hosts at your will by modifying [hosts.yaml](./inventories/stage/hosts.yaml)
+- Specify inventory hosts names at your will by modifying [hosts.yaml](./inventories/stage/hosts.yaml)
 
 
 - Install requirements
