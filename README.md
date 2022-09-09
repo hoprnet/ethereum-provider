@@ -11,7 +11,7 @@ This repository provides an ansible playbook to install and Ethereum provider on
 The [Hoprnet](https://github.com/hoprnet/hoprnet) protocol is already using these ethereum provider endpoints and has no dependenecy with other third party providers.
 
 
-This repo takes into consideration that you might need to provide a high availability service, and thats why we use an [HAProxy](http://www.haproxy.org/) to perform the load balancing across multiple [Nethermind Ethereum](https://nethermind.io) clients that are in charge of synchronizing the Gnosis Chain network. The frontends defined at HAProxy are configured with SSL.
+This repo takes into consideration that you might need to provide a high availability service, and that's why we use an [HAProxy](http://www.haproxy.org/) to perform the load balancing across multiple [Nethermind Ethereum](https://nethermind.io) clients that are in charge of synchronizing the Gnosis Chain network. The frontends defined at HAProxy are configured with SSL.
 
 This repository is shipped with the configuration of Gnosis XDai and Goerli chains but more endpoints could be provided easily by :
 * Modifying the [nethermind.yaml](./playbooks/nethermind.yaml) to invoke an additional `hopr.nethermind` role by specify other values
@@ -51,9 +51,8 @@ Installation
 
 - Create 4 Debian linux machines, they can be bare metal or virtual machines.
 - In case that you are using a dynamic ansible inventory, then modify the [hosts.yaml](./inventories/hosts.yaml) file to assign the hostnames to the desired groups `loadbalancers` and `nethermind`. Some dynamic ansible inventories use tag machines for grouping, so tagging the machine would be a simplier way. 
-- In case that you are using a static ansible inventory, then create a file called `ssh_config` at the root of this repo that will have the ssh configuration to connect to those linux machines. Here is an example of the contents of this file:
+- In case that you are using a static ansible inventory, then create a file called `ssh_config` at the root of this repo that will have the ssh configuration to connect to those linux machines. Here is an example of the contents of that file:
   ````
-  # Add this line to your ~/.ssh/config file
   ## Load Balancers
   Host primary
       HostName W.X.Y.Z
@@ -70,7 +69,8 @@ Installation
       IdentityFile ~/.ssh/<your_host_private_key>
       StrictHostKeyChecking no
       IdentitiesOnly yes
-
+  
+  # Nethermind nodes
   Host nethermind01
       HostName W.X.Y.Z
       User root
@@ -98,7 +98,7 @@ Installation
   ssh nethermind01
   ssh nethermind02
   ```
-  - Specify inventory hosts names at your will by modifying [hosts.yaml](./inventories/hosts.yaml)
+  - If your hosts have a different name from the example above, specify those names at the inventory file hosts by modifying [hosts.yaml](./inventories/hosts.yaml)
 - Install ansible role requirements
 ```
     make galaxy
