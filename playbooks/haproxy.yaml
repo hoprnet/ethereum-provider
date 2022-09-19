@@ -1,10 +1,10 @@
 ---
-- name: "Setup HAProxy"
+- name: "Init HAProxy"
   hosts: loadbalancers
   gather_facts: true
   become: true
   tags:
-    - setup
+    - init
   pre_tasks:
     - name: Update repositories cache
       ansible.builtin.apt:
@@ -15,17 +15,25 @@
       docker_install_compose: true
       docker_compose_version: "v2.6.1"
       docker_compose_path: /usr/local/bin/docker-compose
-  tasks:
-    - name: "Install certbot"
-      ansible.builtin.include_role:
-        name: hopr.certbot
 - name: "Install HAProxy"
   hosts: loadbalancers
   gather_facts: true
   become: true
   tags:
+    - install      
+  tasks:
+    - name: "Install certbot"
+      ansible.builtin.include_role:
+        name: hopr.certbot
+    - name: "Include and setup HA Proxy"
+      ansible.builtin.include_role:
+        name: hopr.haproxy        
+- name: "Setup HAProxy"
+  hosts: loadbalancers
+  gather_facts: true
+  become: true
+  tags:
     - setup
-    - install
   tasks:
     - name: "Install certificates"
       ansible.builtin.include_role:
@@ -39,14 +47,18 @@
           email: "acme@hoprnet.org"
         - domain_name: "{{ goerli_domain_name }}"
           email: "acme@hoprnet.org"
-    - name: "Install HA Proxy"
+    - name: "Add HAProxy backends"
       ansible.builtin.include_role:
         name: hopr.haproxy
+        tasks_from: add_backend
       vars:
-        domains:
-          - domain_name: "{{ gnosis_domain_name }}"
-            backend_port: "{{ gnosis_backend_port }}"
-            backend_hosts: "{{ gnosis_backend_hosts }}"
-          - domain_name: "{{ goerli_domain_name }}"
-            backend_port: "{{ goerli_backend_port }}"
-            backend_hosts: "{{ goerli_backend_hosts }}"
+        domain_name: "{{ item.domain_name }}"
+        backend_port: "{{ item.backend_port }}"
+        backend_hosts: "{{ item.backend_hosts }}"
+      with_items:
+        - domain_name: "{{ gnosis_domain_name }}"
+          backend_port: "{{ gnosis_backend_port }}"
+          backend_hosts: "{{ gnosis_backend_hosts }}"
+        - domain_name: "{{ goerli_domain_name }}"
+          backend_port: "{{ goerli_backend_port }}"
+          backend_hosts: "{{ goerli_backend_hosts }}"        

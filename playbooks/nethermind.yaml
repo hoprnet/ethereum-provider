@@ -4,7 +4,7 @@
   gather_facts: true
   become: true
   tags:
-    - setup
+    - init
   pre_tasks:
     - name: Update repositories cache
       ansible.builtin.apt:

@@ -1,4 +1,4 @@
 ---
 # HA Proxy Configuration
 gnosis_domain_name: "secondary.gnosis-chain.rpc.hoprtech.net"
-goerli_domain_name: "certbot1.molecule.hoprtech.net"
+goerli_domain_name: "secondary.goerli-chain.rpc.hoprtech.net"
