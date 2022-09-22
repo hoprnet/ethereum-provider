@@ -1,33 +1,33 @@
 ---
-- name: "Init HAProxy"
-  hosts: loadbalancers
-  gather_facts: true
-  become: true
-  tags:
-    - init
-  pre_tasks:
-    - name: Update repositories cache
-      ansible.builtin.apt:
-        update_cache: true
-  roles:
-    - role: geerlingguy.docker
-      docker_apt_arch: "amd64"
-      docker_install_compose: true
-      docker_compose_version: "v2.6.1"
-      docker_compose_path: /usr/local/bin/docker-compose
-- name: "Install HAProxy"
-  hosts: loadbalancers
-  gather_facts: true
-  become: true
-  tags:
-    - install      
-  tasks:
-    - name: "Install certbot"
-      ansible.builtin.include_role:
-        name: hopr.certbot
-    - name: "Include and setup HA Proxy"
-      ansible.builtin.include_role:
-        name: hopr.haproxy        
+# - name: "Init HAProxy"
+#   hosts: loadbalancers
+#   gather_facts: true
+#   become: true
+#   tags:
+#     - init
+#   pre_tasks:
+#     - name: Update repositories cache
+#       ansible.builtin.apt:
+#         update_cache: true
+#   roles:
+#     - role: geerlingguy.docker
+#       docker_apt_arch: "amd64"
+#       docker_install_compose: true
+#       docker_compose_version: "v2.6.1"
+#       docker_compose_path: /usr/local/bin/docker-compose
+# - name: "Install HAProxy"
+#   hosts: loadbalancers
+#   gather_facts: true
+#   become: true
+#   tags:
+#     - install      
+#   tasks:
+#     - name: "Install certbot"
+#       ansible.builtin.include_role:
+#         name: hopr.certbot
+#     - name: "Include and setup HA Proxy"
+#       ansible.builtin.include_role:
+#         name: hopr.haproxy        
 - name: "Setup HAProxy"
   hosts: loadbalancers
   gather_facts: true
