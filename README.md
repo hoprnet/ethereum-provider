@@ -7,8 +7,8 @@ We also provide deployments for Gnosis Chain (previously known as xDai) and Goer
 At [HOPR](https://hoprnet.org/) we have deployed this playbook into our infrastructure and it is available publicly to anyone at these endpoints:
 * https://primary.gnosis-chain.rpc.hoprtech.com
 * https://secondary.gnosis-chain.rpc.hoprtech.com
-* https://primary.goerli-chain.rpc.hoprtech.com
-* https://secondary.goerli-chain.rpc.hoprtech.com
+* https://primary.goerli.rpc.hoprtech.com
+* https://secondary.goerli.rpc.hoprtech.com
 
 The [HOPR](https://github.com/hoprnet/hoprnet) protocol is already using these Ethereum provider endpoints and has no dependenecy with other third party providers.
 
@@ -38,10 +38,10 @@ curl -H "Origin: http://secondary.gnosis-chain.rpc.hoprtech.com" -X POST --data 
 
 Goerli
 ```
-curl -H "Origin: http://primary.goerli-chain.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://primary.goerli-chain.rpc.hoprtech.net
+curl -H "Origin: http://primary.goerli.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://primary.goerli.rpc.hoprtech.net
 ```
 ```
-curl -H "Origin: http://secondary.goerli-chain.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.goerli-chain.rpc.hoprtech.net
+curl -H "Origin: http://secondary.goerli.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.goerli.rpc.hoprtech.net
 ```
 
 
@@ -123,7 +123,7 @@ Playbook Variables
 | Variables | Required | Default value | Description |
 |-----------|----------|---------------|-------------|
 | gnosis_domain_name  | true     | *primary.gnosis-chain.rpc.hoprtech.net*          | DNS name for the gnosis chain. Should be specified as host variable at the inventory to provide different values for each host. |
-| goerli_domain_name  | true     | *primary.goerli-chain.rpc.hoprtech.net*          | DNS name for the goerli chain. Should be specified as host variable at the inventory to provide different values for each host. |
+| goerli_domain_name  | true     | *primary.goerli.rpc.hoprtech.net*          | DNS name for the goerli chain. Should be specified as host variable at the inventory to provide different values for each host. |
 | gnosis_backend_port  | true     | *8545*          | Port used to communicate between HA Proxy and Nethermind for Gnosis |
 | goerli_backend_port  | true     | *8546*          | Port used to communicate between HA Proxy and Nethermind for Goerli |
 | gnosis_backend_hosts  | true     | *[IP1, IP2]*          | List of IP of the Nethermind hosts for Gnosis |

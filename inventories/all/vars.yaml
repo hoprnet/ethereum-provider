@@ -1,11 +1,2 @@
 ---
 ansible_ssh_common_args: '-F ./ssh_config'
-
-gnosis_backend_port: 8545
-gnosis_backend_hosts:
-  - 95.217.33.35
-  - 116.202.86.163
-goerli_backend_port: 85456
-goerli_backend_hosts:
-  - 95.217.33.35
-  - 116.202.86.163
