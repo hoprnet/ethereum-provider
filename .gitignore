@@ -1,4 +1,3 @@
 ansible-log*.log
-hetzner_ssh_config
 ssh_config
 .DS_Store
