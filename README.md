@@ -5,10 +5,10 @@ This repository provides an Ansible playbook to install a highly scalable, avail
 
 We also provide deployments for Gnosis Chain (previously known as xDai) and Goerli networks. 
 At [HOPR](https://hoprnet.org/) we have deployed this playbook into our infrastructure and it is available publicly to anyone at these endpoints:
-* https://primary.gnosis-chain.rpc.hoprtech.com
-* https://secondary.gnosis-chain.rpc.hoprtech.com
-* https://primary.goerli.rpc.hoprtech.com
-* https://secondary.goerli.rpc.hoprtech.com
+* https://primary.gnosis-chain.rpc.hoprtech.net
+* https://secondary.gnosis-chain.rpc.hoprtech.net
+* https://primary.goerli.rpc.hoprtech.net
+* https://secondary.goerli.rpc.hoprtech.net
 
 The [HOPR](https://github.com/hoprnet/hoprnet) protocol is already using these Ethereum provider endpoints and has no dependenecy with other third party providers.
 
@@ -30,18 +30,18 @@ Public endpoints
 
 Gnosis Chain
 ```
-curl -H "Origin: http://primary.gnosis-chain.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://primary.gnosis-chain.rpc.hoprtech.net
+curl -H "Origin: http://primary.gnosis-chain.rpc.hoprtech.net" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://primary.gnosis-chain.rpc.hoprtech.net
 ```
 ```
-curl -H "Origin: http://secondary.gnosis-chain.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.gnosis-chain.rpc.hoprtech.net
+curl -H "Origin: http://secondary.gnosis-chain.rpc.hoprtech.net" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.gnosis-chain.rpc.hoprtech.net
 ```
 
 Goerli
 ```
-curl -H "Origin: http://primary.goerli.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://primary.goerli.rpc.hoprtech.net
+curl -H "Origin: http://primary.goerli.rpc.hoprtech.net" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://primary.goerli.rpc.hoprtech.net
 ```
 ```
-curl -H "Origin: http://secondary.goerli.rpc.hoprtech.com" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.goerli.rpc.hoprtech.net
+curl -H "Origin: http://secondary.goerli.rpc.hoprtech.net" -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":67}' https://secondary.goerli.rpc.hoprtech.net
 ```
 
 
